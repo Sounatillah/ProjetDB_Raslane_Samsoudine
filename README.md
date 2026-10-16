@@ -88,6 +88,12 @@ Fournis donc les règles de gestion et le dictionnaire de données.
 | 34 | Date d'embauche de l'employé | DATE |
 
 
+## 4. Modèle Conceptuel de Données (MCD)
+
+Voici notre MCD pour la gestion d'un parc d'attractions.
+
+![MCD du parc d'attractions](MCD_Parc_Attractions.png)
+
 
    
 
