@@ -26,7 +26,7 @@ ORDER BY nom_visiteur;
 -- Q5 : passages de l'été avec plus d'une heure d'attente
 SELECT id_attraction, date_heure, temps_attente
 FROM passage
-WHERE date_heure BETWEEN '2026-07-01' AND '2026-08-31 23:59:59'
+WHERE date_heure BETWEEN '2026-06-01' AND '2026-08-31'
   AND temps_attente > 60
 ORDER BY temps_attente DESC;
 
