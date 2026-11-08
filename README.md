@@ -126,6 +126,34 @@ propose = (#id_type_chambre, #id_hotel, prix_nuit DECIMAL(7,2));
   La base de données a été créée sous MySQL avec les deux scripts ci-joint : 1_creation.sql pour les tables et 2_contraintes.sql pour les contraintes.
 Génère un script SQL d'insertion pour remplir cette base avec des données réalistes. Les tables doivent être remplies dans l'ordre des clés étrangères, avec des identifiants explicites, et toutes les contraintes doivent être respectées. Les données doivent être cohérentes entre elles (par exemple, un passage a lieu pendant la validité du billet). Mets assez de données pour pouvoir faire des requêtes : une quarantaine de visiteurs, environ 25 attractions, 75 billets et 200 passages, et les autres tables en proportion.
 
+## 7. Scénario d'utilisation
+
+La base est utilisée par la directrice du parc, Catherine Lemoine. À la fin de la saison 2026, elle fait le bilan de l'année pour préparer la saison 2027 : quelles attractions remettre en service ou agrandir, quels restaurants et hôtels marchent le mieux, et comment le personnel est réparti.
+Elle se pose les questions suivantes (les numéros sont ceux des requêtes de `4_interrogation.sql`) :
+
+- **Q1** : Quelles attractions sont fermées ou en maintenance ?
+- **Q2** : Quels types de cuisine sont proposés dans les restaurants du parc ?
+- **Q3** : Quelles attractions sont accessibles aux enfants (taille minimale de 100 cm au plus) ?
+- **Q4** : Quels visiteurs ont une adresse gmail, pour leur envoyer un questionnaire de satisfaction ?
+- **Q5** : Quels passages de l'été ont eu plus d'une heure d'attente ?
+- **Q6** : Combien y a-t-il d'employés par fonction ?
+- **Q7** : Combien de billets ont été vendus et quelle recette par type de billet ?
+- **Q8** : Quelles attractions sont les plus fréquentées (plus de 12 passages) ?
+- **Q9** : Quels restaurants ont fait plus de 300 € de chiffre d'affaires ?
+- **Q10** : Quel est le prix minimum, maximum et moyen d'une nuit dans chaque hôtel ?
+- **Q11** : Dans quelle zone se trouve chaque attraction ?
+- **Q12** : Combien de passages y a-t-il eu dans chaque zone ?
+- **Q13** : Combien de réservations a chaque hôtel, y compris les hôtels sans réservation ?
+- **Q14** : Qui est le supérieur de chaque employé ?
+- **Q15** : Combien a coûté chaque séjour à l'hôtel ?
+- **Q16** : Quels visiteurs n'ont mangé dans aucun restaurant ?
+- **Q17** : Quelles attractions n'ont eu aucun passage ?
+- **Q18** : Quelles zones ont au moins une attraction en maintenance ?
+- **Q19** : Quelle attraction a la plus grande capacité ?
+- **Q20** : Quelles attractions se trouvent dans une zone qui propose un spectacle de plus de 30 minutes ?
+- **Q21** : Quels restaurants ont un chiffre d'affaires supérieur à la moyenne ?
+- **Q22** : Quelles attractions encore ouvertes ont eu plus de 60 minutes d'attente cet été ? Elles sont candidates à un agrandissement ; celles passées en maintenance depuis sont écartées.
+
 
 
 
