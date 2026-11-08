@@ -1,0 +1,5 @@
+Tu travailles dans le domaine du loisir et du divertissement. Ton entreprise a comme activité l'exploitation d'un parc d'attractions. C'est une entreprise comme Disneyland, Astérix, Europa Park. Les données sont collectées sur les visiteurs, les attractions, les employés, les billets, les spectacles, les restaurants, les hôtels et les différentes zones du parc. Inspire-toi des sites web suivants : https://www.disneylandparis.com/fr-fr, https://www.parcasterix.fr/, https://www.europapark.de/fr.
+
+La base de données a été créée sous MySQL avec les deux scripts ci-joint : 1_creation.sql pour les tables et 
+2_contraintes.sql pour les contraintes.
+Génère un script SQL d'insertion pour remplir cette base avec des données réalistes. Les tables doivent être remplies dans l'ordre des clés étrangères, avec des identifiants explicites, et toutes les contraintes doivent être respectées. Les données doivent être cohérentes entre elles (par exemple, un passage a lieu pendant la validité du billet). Mets assez de données pour pouvoir faire des requêtes : une quarantaine de visiteurs, environ 25 attractions, 75 billets et 200 passages, et les autres tables en proportion.
