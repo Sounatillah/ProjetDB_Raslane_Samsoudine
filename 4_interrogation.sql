@@ -137,11 +137,12 @@ WHERE id_restaurant IN (SELECT id_restaurant
                         HAVING SUM(montant_addition) > (SELECT SUM(montant_addition) / COUNT(DISTINCT id_restaurant)
                                                         FROM addition));
                                                         
--- Q22 : attractions ouvertes ayant eu un temps d'attente de plus de 60 minutes
+-- Q22 : attractions ouvertes ayant eu un temps d'attente de plus de 60 minutes cet été
 SELECT DISTINCT a.nom_attraction
 FROM attraction a
 JOIN passage p ON p.id_attraction = a.id_attraction
 WHERE a.statut = 'ouverte'
-  AND p.temps_attente > 60;
+  AND p.temps_attente > 60
+  AND p.date_heure BETWEEN '2026-06-01' AND '2026-08-31';
 
 
