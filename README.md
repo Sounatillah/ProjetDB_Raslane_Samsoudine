@@ -94,6 +94,28 @@ Voici notre MCD pour la gestion d'un parc d'attractions.
 
 ![MCD du parc d'attractions](MCD_Parc_Attractions.png)
 
+ ## 5. Modèle logique de données (MLD)
+
+```text
+visiteur = (id_visiteur INT, nom_visiteur VARCHAR(50), prénom_visiteur VARCHAR(50), date_naissance DATE, email VARCHAR(50));
+zone = (id_zone INT, nom_zone VARCHAR(50), theme_zone VARCHAR(50));
+attraction = (id_attraction INT, nom_attraction VARCHAR(50), taille_minimale INT, capacité INT, statut VARCHAR(50), #id_zone);
+spectacle = (id_spectacle INT, titre_spectacle VARCHAR(100), duree_spectacle INT, #id_zone);
+représentation = (#id_spectacle, num_representation INT, date_heure_representation DATETIME, nombre_places INT);
+restaurant = (id_restaurant INT, nom_restaurant VARCHAR(30), type_cuisine VARCHAR(30), #id_zone);
+Addition = (id_addition INT, montant_addition DECIMAL(8,2), #id_restaurant, #id_visiteur);
+Hotel = (id_hotel INT, nom_hotel VARCHAR(50), nombres_etoiles INT);
+Type_Chambre = (id_type_chambre INT, type_chambre VARCHAR(50));
+employe = (Id_employe INT, nom_employe VARCHAR(50), prenom_employe VARCHAR(50), fonction VARCHAR(50), date_embauche DATE, #Id_employe_1*, #id_zone);
+tarif = (id_tarif INT, type_billet VARCHAR(50), catégorie_tarifaire VARCHAR(50), prix_billet DECIMAL(7,2));
+reservation_hotel = (id_reservation INT, date_arrive DATE, date_départ DATE, #id_type_chambre, #id_hotel, #id_visiteur);
+billet = (num_billet INT, date_validité DATE, #id_tarif, #id_visiteur);
+passage = (id_passage INT, temps_attente INT, date_heure DATETIME, #id_attraction, #num_billet);
+propose = (#id_type_chambre, #id_hotel, prix_nuit DECIMAL(7,2));
+```
+
+
+
 
    
 
