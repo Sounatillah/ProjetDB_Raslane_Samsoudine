@@ -113,6 +113,11 @@ billet = (num_billet INT, date_validité DATE, #id_tarif, #id_visiteur);
 passage = (id_passage INT, temps_attente INT, date_heure DATETIME, #id_attraction, #num_billet);
 propose = (#id_type_chambre, #id_hotel, prix_nuit DECIMAL(7,2));
 ```
+## 6. Fichiers SQL
+
+1. [Création des tables](1_creation.sql)
+2. [Ajout des contraintes](2_contraintes.sql)
+3. [Insertion des données](3_insertion.sql)
 
 
 
