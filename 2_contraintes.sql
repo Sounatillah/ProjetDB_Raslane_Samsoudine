@@ -100,13 +100,10 @@ ALTER TABLE reservation_hotel ADD CONSTRAINT ck_dates_sejour
    CHECK (date_depart > date_arrivee);
  
 -- Format d'une donnée : l'e-mail contient un @ et un point
--- ('_' = un caractère quelconque, '%' = zéro ou plusieurs caractères)
 ALTER TABLE visiteur ADD CONSTRAINT ck_email
    CHECK (email LIKE '%_@_%._%');
   
--- RG 21-23 : on ne peut réserver dans un hôtel qu'un type de chambre que
--- cet hôtel propose -> le couple (type de chambre, hôtel) doit exister
--- dans la table propose
+ -- RG 21-23 : on ne peut réserver qu'un type de chambre proposé par l'hôtel
 ALTER TABLE reservation_hotel ADD CONSTRAINT fk_reservation_propose
    FOREIGN KEY (id_type_chambre, id_hotel)
    REFERENCES propose(id_type_chambre, id_hotel)
