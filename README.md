@@ -156,7 +156,72 @@ Elle se pose les questions suivantes (les numéros sont ceux des requêtes de `4
 
 4. [Requêtes d’interrogation](4_interrogation.sql)
 
+## 8. Étude des plans d'exécution
 
+### Requête étudiée
+
+Q22 : noms des attractions ouvertes qui ont eu plus de 60 minutes d'attente cet été.
+
+```sql
+SELECT DISTINCT a.nom_attraction
+FROM attraction a
+JOIN passage p ON p.id_attraction = a.id_attraction
+WHERE a.statut = 'ouverte'
+  AND p.temps_attente > 60
+  AND p.date_heure BETWEEN '2026-06-01' AND '2026-08-31';
+```
+
+En algèbre relationnelle :
+
+π nom_attraction ( σ statut = 'ouverte' ∧ temps_attente > 60 ∧ date_heure entre 2026-06-01 et 2026-08-31 ( attraction ⋈ passage ) )
+
+Elle utilise trois opérateurs : la sélection σ, la jointure ⋈ et la projection π.
+
+Nombre de lignes dans les tables : attraction = 25, passage = 228.
+
+Pour compter les instructions, on applique la méthode du TD3 (exercice 6) :
+- une jointure entre A de taille n1 et B de taille n2 nécessite n1 × n2 instructions ;
+- une projection ou une sélection parcourt toute la table de taille n, soit n instructions.
+
+### Plan 1 : jointure d'abord
+
+```mermaid
+flowchart TD
+    P["π nom_attraction<br/>6 lignes"] --> S["σ statut = 'ouverte' ∧ temps_attente > 60 ∧ date d'été<br/>22 lignes"]
+    S --> J["⋈ attraction.id_attraction = passage.id_attraction<br/>228 lignes"]
+    J --> A["attraction<br/>25 lignes"]
+    J --> PA["passage<br/>228 lignes"]
+```
+
+| Étape | Opération | Lignes en entrée | Instructions | Lignes en sortie |
+|---|---|---|---|---|
+| 1 | attraction ⋈ passage | 25 et 228 | 25 × 228 = 5 700 | 228 |
+| 2 | σ statut, temps_attente et date | 228 | 228 | 22 |
+| 3 | π nom_attraction | 22 | 22 | 6 |
+| | **Total** | | **5 950** | |
+
+### Plan 2 : sélections d'abord
+
+```mermaid
+flowchart TD
+    P["π nom_attraction<br/>6 lignes"] --> J["⋈ attraction.id_attraction = passage.id_attraction<br/>22 lignes"]
+    J --> S1["σ statut = 'ouverte'<br/>20 lignes"]
+    J --> S2["σ temps_attente > 60 ∧ date d'été<br/>23 lignes"]
+    S1 --> A["attraction<br/>25 lignes"]
+    S2 --> PA["passage<br/>228 lignes"]
+```
+
+| Étape | Opération | Lignes en entrée | Instructions | Lignes en sortie |
+|---|---|---|---|---|
+| 1 | σ statut = 'ouverte' sur attraction | 25 | 25 | 20 |
+| 2 | σ temps_attente > 60 et date d'été sur passage | 228 | 228 | 23 |
+| 3 | jointure des deux résultats | 20 et 23 | 20 × 23 = 460 | 22 |
+| 4 | π nom_attraction | 22 | 22 | 6 |
+| | **Total** | | **735** | |
+
+### Conclusion
+
+Le plan 2 demande environ 8 fois moins d'instructions que le plan 1 (735 contre 5 950). La jointure est l'opération la plus coûteuse, car elle compare chaque ligne d'une table avec chaque ligne de l'autre. En faisant les sélections avant la jointure, on réduit attraction à 20 lignes et passage à 23 lignes, et la jointure ne fait plus que 460 comparaisons au lieu de 5 700. Le plan 2 est donc le plan optimisé : il faut appliquer les sélections le plus tôt possible, avant les jointures.
 
 
 
