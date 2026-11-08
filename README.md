@@ -154,6 +154,8 @@ Elle se pose les questions suivantes (les numéros sont ceux des requêtes de `4
 - **Q21** : Quels restaurants ont un chiffre d'affaires supérieur à la moyenne ?
 - **Q22** : Quelles attractions encore ouvertes ont eu plus de 60 minutes d'attente cet été ? Elles sont candidates à un agrandissement ; celles passées en maintenance depuis sont écartées.
 
+4. [Requêtes d’interrogation](4_interrogation.sql)
+
 
 
 
