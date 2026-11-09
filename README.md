@@ -96,23 +96,32 @@ Voici notre MCD pour la gestion d'un parc d'attractions.
 
  ## 5. Modèle logique de données (MLD)
 
+
+## 5. Modèle logique de données (MLD)
+
+Les accents ont été retirés dans le SQL pour la compatibilité MySQL.
+
 ```text
-visiteur = (id_visiteur INT, nom_visiteur VARCHAR(50), prénom_visiteur VARCHAR(50), date_naissance DATE, email VARCHAR(50));
+visiteur = (id_visiteur INT, nom_visiteur VARCHAR(50), prenom_visiteur VARCHAR(50), date_naissance DATE, email VARCHAR(100));
 zone = (id_zone INT, nom_zone VARCHAR(50), theme_zone VARCHAR(50));
-attraction = (id_attraction INT, nom_attraction VARCHAR(50), taille_minimale INT, capacité INT, statut VARCHAR(50), #id_zone);
+attraction = (id_attraction INT, nom_attraction VARCHAR(50), taille_minimale INT, capacite INT, statut VARCHAR(50), #id_zone);
 spectacle = (id_spectacle INT, titre_spectacle VARCHAR(100), duree_spectacle INT, #id_zone);
-représentation = (#id_spectacle, num_representation INT, date_heure_representation DATETIME, nombre_places INT);
-restaurant = (id_restaurant INT, nom_restaurant VARCHAR(30), type_cuisine VARCHAR(30), #id_zone);
-Addition = (id_addition INT, montant_addition DECIMAL(8,2), #id_restaurant, #id_visiteur);
-Hotel = (id_hotel INT, nom_hotel VARCHAR(50), nombres_etoiles INT);
-Type_Chambre = (id_type_chambre INT, type_chambre VARCHAR(50));
-employe = (Id_employe INT, nom_employe VARCHAR(50), prenom_employe VARCHAR(50), fonction VARCHAR(50), date_embauche DATE, #Id_superieur, #id_zone);
-tarif = (id_tarif INT, type_billet VARCHAR(50), catégorie_tarifaire VARCHAR(50), prix_billet DECIMAL(7,2));
-reservation_hotel = (id_reservation INT, date_arrive DATE, date_départ DATE, #id_type_chambre, #id_hotel, #id_visiteur);
-billet = (num_billet INT, date_validité DATE, #id_tarif, #id_visiteur);
+representation = (#id_spectacle, num_representation INT, date_heure_representation DATETIME, nombre_places INT);
+restaurant = (id_restaurant INT, nom_restaurant VARCHAR(50), type_cuisine VARCHAR(30), #id_zone);
+addition = (id_addition INT, montant_addition DECIMAL(8,2), #id_restaurant, #id_visiteur);
+hotel = (id_hotel INT, nom_hotel VARCHAR(50), nombre_etoiles INT);
+type_chambre = (id_type_chambre INT, type_chambre VARCHAR(50));
+employe = (id_employe INT, nom_employe VARCHAR(50), prenom_employe VARCHAR(50), fonction VARCHAR(50), date_embauche DATE, #id_superieur, #id_zone);
+tarif = (id_tarif INT, type_billet VARCHAR(50), categorie_tarifaire VARCHAR(50), prix_billet DECIMAL(7,2));
+reservation_hotel = (id_reservation INT, date_arrivee DATE, date_depart DATE, #id_type_chambre, #id_hotel, #id_visiteur);
+billet = (num_billet INT, date_validite DATE, #id_tarif, #id_visiteur);
 passage = (id_passage INT, temps_attente INT, date_heure DATETIME, #id_attraction, #num_billet);
 propose = (#id_type_chambre, #id_hotel, prix_nuit DECIMAL(7,2));
 ```
+
+Dans `representation`, la clé primaire est composée de `id_spectacle` et `num_representation` : la représentation est une entité faible, identifiée par son spectacle.
+
+Dans `reservation_hotel`, le couple (`id_type_chambre`, `id_hotel`) est une clé étrangère composite qui référence la table `propose`. On ne peut donc réserver qu'un type de chambre réellement proposé par l'hôtel choisi. Cette contrainte est ajoutée dans `2_contraintes.sql`.
 ## 6. Fichiers SQL
 
 1. [Création des tables](1_creation.sql)
