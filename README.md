@@ -96,9 +96,6 @@ Voici notre MCD pour la gestion d'un parc d'attractions.
 
  ## 5. Modèle logique de données (MLD)
 
-
-## 5. Modèle logique de données (MLD)
-
 Les accents ont été retirés dans le SQL pour la compatibilité MySQL.
 
 ```text
@@ -122,6 +119,7 @@ propose = (#id_type_chambre, #id_hotel, prix_nuit DECIMAL(7,2));
 Dans `representation`, la clé primaire est composée de `id_spectacle` et `num_representation` : la représentation est une entité faible, identifiée par son spectacle.
 
 Dans `reservation_hotel`, le couple (`id_type_chambre`, `id_hotel`) est une clé étrangère composite qui référence la table `propose`. On ne peut donc réserver qu'un type de chambre réellement proposé par l'hôtel choisi. Cette contrainte est ajoutée dans `2_contraintes.sql`.
+
 ## 6. Fichiers SQL
 
 1. [Création des tables](1_creation.sql)
